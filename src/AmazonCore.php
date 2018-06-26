@@ -1,4 +1,4 @@
-<?php namespace Sonnenglas\AmazonMws;
+<?php namespace Xyrintech\AmazonMws;
 
 use Config, Log;
 use DateTime;

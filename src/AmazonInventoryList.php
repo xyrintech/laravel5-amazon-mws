@@ -1,6 +1,6 @@
-<?php namespace Sonnenglas\AmazonMws;
+<?php namespace Xyrintech\AmazonMws;
 
-use Sonnenglas\AmazonMws\AmazonInventoryCore;
+use Xyrintech\AmazonMws\AmazonInventoryCore;
 
 /**
  * Copyright 2013 CPI Group, LLC

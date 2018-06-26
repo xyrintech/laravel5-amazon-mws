@@ -1,7 +1,7 @@
 <?php 
-namespace Sonnenglas\AmazonMws;
+namespace Xyrintech\AmazonMws;
  
-use Sonnenglas\AmazonMws\AmazonFeedsCore;
+use Xyrintech\AmazonMws\AmazonFeedsCore;
 
 /**
  * Copyright 2013 CPI Group, LLC
