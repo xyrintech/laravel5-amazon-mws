@@ -265,20 +265,22 @@ class AmazonInventoryList extends AmazonInventoryCore implements \Iterator
             }
             if (isset($this->options['ResponseGroup']) && $this->options['ResponseGroup'] == 'Detailed') {
                 $j = 0;
-                foreach ($x->SupplyDetail->children() as $z) {
-                    if ((string)$z->EarliestAvailableToPick->TimepointType == 'DateTime') {
-                        $this->supplyList[$this->index]['SupplyDetail'][$j]['EarliestAvailableToPick'] = (string)$z->EarliestAvailableToPick->DateTime;
-                    } else {
-                        $this->supplyList[$this->index]['SupplyDetail'][$j]['EarliestAvailableToPick'] = (string)$z->EarliestAvailableToPick->TimepointType;
+                if($x && $x->SupplyDetail){
+                    foreach ($x->SupplyDetail->children() as $z) {
+                        if ((string)$z->EarliestAvailableToPick->TimepointType == 'DateTime') {
+                            $this->supplyList[$this->index]['SupplyDetail'][$j]['EarliestAvailableToPick'] = (string)$z->EarliestAvailableToPick->DateTime;
+                        } else {
+                            $this->supplyList[$this->index]['SupplyDetail'][$j]['EarliestAvailableToPick'] = (string)$z->EarliestAvailableToPick->TimepointType;
+                        }
+                        if ((string)$z->LatestAvailableToPick->TimepointType == 'DateTime') {
+                            $this->supplyList[$this->index]['SupplyDetail'][$j]['LatestAvailableToPick'] = (string)$z->LatestAvailableToPick->DateTime;
+                        } else {
+                            $this->supplyList[$this->index]['SupplyDetail'][$j]['LatestAvailableToPick'] = (string)$z->LatestAvailableToPick->TimepointType;
+                        }
+                        $this->supplyList[$this->index]['SupplyDetail'][$j]['Quantity'] = (string)$z->Quantity;
+                        $this->supplyList[$this->index]['SupplyDetail'][$j]['SupplyType'] = (string)$z->SupplyType;
+                        $j++;
                     }
-                    if ((string)$z->LatestAvailableToPick->TimepointType == 'DateTime') {
-                        $this->supplyList[$this->index]['SupplyDetail'][$j]['LatestAvailableToPick'] = (string)$z->LatestAvailableToPick->DateTime;
-                    } else {
-                        $this->supplyList[$this->index]['SupplyDetail'][$j]['LatestAvailableToPick'] = (string)$z->LatestAvailableToPick->TimepointType;
-                    }
-                    $this->supplyList[$this->index]['SupplyDetail'][$j]['Quantity'] = (string)$z->Quantity;
-                    $this->supplyList[$this->index]['SupplyDetail'][$j]['SupplyType'] = (string)$z->SupplyType;
-                    $j++;
                 }
             }
             $this->index++;
