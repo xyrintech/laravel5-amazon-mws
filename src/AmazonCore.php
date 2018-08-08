@@ -424,6 +424,13 @@ abstract class AmazonCore
             if (!array_key_exists('secretKey', $store[$s])) {
                 $this->log("Secret Key is missing!", 'Warning');
             }
+            
+            if (array_key_exists('mwsAuthToken', $store[$s])) {
+                $this->options['MWSAuthToken'] = $store[$s]['mwsAuthToken'];
+            } else {
+                $this->log("MWSAuthToken is missing!", 'Warning');
+            }
+            
             // Overwrite Amazon service url if specified
             if (array_key_exists('amazonServiceUrl', $store[$s])) {
                 $AMAZON_SERVICE_URL = $store[$s]['amazonServiceUrl'];
