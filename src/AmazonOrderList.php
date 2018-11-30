@@ -35,6 +35,7 @@ class AmazonOrderList extends AmazonOrderCore implements Iterator
     protected $tokenFlag = false;
     protected $tokenUseFlag = false;
     private $index = 0;
+    public $reportRequest = null;
 
     /**
      * Amazon Order Lists pull a set of Orders and turn them into an array of <i>AmazonOrder</i> objects.
@@ -447,7 +448,12 @@ class AmazonOrderList extends AmazonOrderCore implements Iterator
             $this->orderList[$this->index]->mockIndex = $this->mockIndex;
             $this->index++;
         }
-
+        
+        //Insert records in database
+        if($this->getList()){
+            \App\AmazonOrderModel::processReport($this->getList(), $this->reportRequest);
+            $this->orderList = array();
+        }
     }
 
     /**
