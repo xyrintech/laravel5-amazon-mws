@@ -72,6 +72,7 @@ class AmazonOrderList extends AmazonOrderCore implements Iterator
         }
         if (isset($THROTTLE_TIME_ORDERLIST)) {
             $this->throttleTime = $THROTTLE_TIME_ORDERLIST;
+            $this->throttleTime = 2;
         }
         $this->throttleGroup = 'ListOrders';
     }
