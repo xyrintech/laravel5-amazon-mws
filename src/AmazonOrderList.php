@@ -116,19 +116,23 @@ class AmazonOrderList extends AmazonOrderCore implements Iterator
     public function setLimits($mode, $lower = null, $upper = null)
     {
         try {
-            if ($upper) {
-                $before = $this->genTime($upper);
-            } else {
-                $before = $this->genTime('- 2 min');
-            }
-            if ($lower) {
-                $after = $this->genTime($lower);
-            } else {
-                $after = $this->genTime('- 2 min');
-            }
-            if ($after > $before) {
-                $after = $this->genTime($upper . ' - 150 sec');
-            }
+            // if ($upper) {
+            //     $before = $this->genTime($upper);
+            // } else { 
+            //     $before = $this->genTime('- 2 min');
+            // }
+            // if ($lower) {
+            //     $after = $this->genTime($lower);
+            // } else {
+            //     $after = $this->genTime('- 2 min');
+            // }
+            // if ($after > $before) {
+            //     $after = $this->genTime($upper . ' - 150 sec');
+            // }
+            
+            $before = $upper;
+            $after = $lower;
+            
             if ($mode == 'Created') {
                 $this->options['CreatedAfter'] = $after;
                 if ($before) {
