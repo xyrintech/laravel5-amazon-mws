@@ -62,6 +62,7 @@ class AmazonReport extends AmazonReportsCore
         }
         if (isset($THROTTLE_TIME_REPORT)) {
             $this->throttleTime = $THROTTLE_TIME_REPORT;
+            $this->throttleTime = 2;
         }
     }
 
