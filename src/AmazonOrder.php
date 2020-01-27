@@ -242,15 +242,15 @@ class AmazonOrder extends AmazonOrderCore
         }
         
         if (isset($xml->IsReplacementOrder)) {
-            $d['IsReplacementOrder'] = (bool) $xml->IsReplacementOrder;
+            $d['IsReplacementOrder'] = filter_var($xml->IsReplacementOrder, FILTER_VALIDATE_BOOLEAN);
         }
 
         if (isset($xml->IsBusinessOrder)) {
-            $d['IsBusinessOrder'] = (bool) $xml->IsBusinessOrder;
+            $d['IsBusinessOrder'] = filter_var($xml->IsBusinessOrder, FILTER_VALIDATE_BOOLEAN);
         }
 
         if (isset($xml->IsPrime)) {
-            $d['IsPrime'] = (bool) $xml->IsPrime;
+            $d['IsPrime'] = filter_var($xml->IsPrime, FILTER_VALIDATE_BOOLEAN);
         }
 
         $this->data = $d;
