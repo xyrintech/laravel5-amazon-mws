@@ -3,7 +3,7 @@
 use Config, Log;
 use DateTime;
 use Exception;
-
+use Dingo\Api\Exception\StoreResourceFailedException;
 
 /**
  * Copyright 2013 CPI Group, LLC
@@ -611,6 +611,14 @@ abstract class AmazonCore
         $this->log("Making request to Amazon: " . $this->options['Action']);
         $response = $this->fetchURL($url, $param);
 
+        if ($response['code'] == '401') {
+            $store_id = config("amazon-mws.store.");
+            $name = \App\AmazonStore::whereId($store_id)->first()->name;
+
+            event(new \App\Events\RequestFailed($store_id, $name));
+            throw new StoreResourceFailedException('Could not create new record.');
+        }
+        
         while ($response['code'] == '503' && $this->throttleStop == false) {
             $this->sleep();
             $response = $this->fetchURL($url, $param);
