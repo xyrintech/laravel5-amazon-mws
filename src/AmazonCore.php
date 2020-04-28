@@ -616,7 +616,9 @@ abstract class AmazonCore
             $name = \App\AmazonStore::whereId($store_id)->first()->name;
 
             event(new \App\Events\RequestFailed($store_id, $name));
-            throw new StoreResourceFailedException('Could not create new record.');
+            throw new StoreResourceFailedException('Error', [
+                    'required' => 'Something wrong with credentials'
+                ]);
         }
         
         while ($response['code'] == '503' && $this->throttleStop == false) {
