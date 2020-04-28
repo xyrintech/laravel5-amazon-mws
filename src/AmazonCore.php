@@ -613,9 +613,12 @@ abstract class AmazonCore
 
         if ($response['code'] == '401') {
             $store_id = config("amazon-mws.store.");
-            $name = \App\AmazonStore::whereId($store_id)->first()->name;
-
-            event(new \App\Events\RequestFailed($store_id, $name));
+            
+            if (Config::get("amazon-mws.store." . $store_id . ".raiseEmail") == true) {
+                $name = \App\AmazonStore::whereId($store_id)->first()->name;
+                event(new \App\Events\RequestFailed($store_id, $name));
+            }
+            
             throw new StoreResourceFailedException('Error', [
                     'required' => 'Something wrong with credentials'
                 ]);
